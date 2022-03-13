@@ -3,7 +3,7 @@ import type { AWS } from '@serverless/typescript';
 const serverlessConfiguration: AWS = {
   service: 'oneliquidity-test',
   frameworkVersion: '3',
-  plugins: ['serverless-esbuild'],
+  plugins: ['serverless-esbuild','serverless-offline', 'serverless-dynamodb-local'],
   provider: {
     name: 'aws',
     runtime: 'nodejs14.x',
