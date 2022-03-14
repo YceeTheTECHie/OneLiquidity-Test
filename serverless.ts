@@ -19,7 +19,7 @@ const serverlessConfiguration: AWS = {
       role: {
         statements: [{
           Effect: "Allow",
-          "Allow": [
+          "Action": [
             "dynamoDB:DescribeTable",
             "dynamoDB:Query",
             "dynamoDB:Scan",
