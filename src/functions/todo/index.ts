@@ -23,3 +23,15 @@ export const createTodo = {
         },
     ],
 };
+
+export const getTodo = {
+    handler: `${handlerPath(__dirname)}/handler.getTodo`,
+    events: [
+        {
+            http: {
+                method: 'get',
+                path: 'todo/{id}',
+            },
+        },
+    ],
+};
