@@ -11,3 +11,15 @@ export const getAllTodos = {
         },
     ],
 };
+
+export const createTodo = {
+    handler: `${handlerPath(__dirname)}/handler.createTodo`,
+    events: [
+        {
+            http: {
+                method: 'post',
+                path: 'todo',
+            },
+        },
+    ],
+};
