@@ -1,16 +1,20 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { formatJSONResponse } from '@libs/api-gateway';
 import { middyfy } from '@libs/lambda';
 import { v4 } from "uuid";
 import todosService from '../../services'
+import { buildResponse } from '../../utils/buildResponse';
 
 
 
 export const getAllTodos = middyfy(async (): Promise<APIGatewayProxyResult> => {
-    const todos = await todosService.getAllTodos();
-    return formatJSONResponse({
-        todos
-    })
+    
+    try {
+       const todos = await todosService.getAllTodos();
+        return buildResponse(200,todos,"Todos retrieved successfully!");
+   } 
+    catch (e) {
+        return buildResponse(500, e.message, "An error occured!");
+    }
 })
 
 export const createTodo = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
@@ -24,15 +28,9 @@ export const createTodo = middyfy(async (event: APIGatewayProxyEvent): Promise<A
             updatedAt: new Date().toISOString(),
 
         })
-        return formatJSONResponse({
-            message: "Todo added successfully",
-            todo
-        });
+        return buildResponse(200,todo,"Todo added successfully!");
     } catch (e) {
-        return formatJSONResponse({
-            status: 500,
-            message: e
-        });
+        return buildResponse(500, e.message, "An error occured!");
     }
 })
 
@@ -40,14 +38,9 @@ export const getTodo = middyfy(async (event: APIGatewayProxyEvent): Promise<APIG
     const id = event.pathParameters.id;
     try {
         const todo = await todosService.getTodo(id)
-        return formatJSONResponse({
-            todo, id
-        });
+        return buildResponse(200, todo, "Todo retrieved successfully!");
     } catch (e) {
-        return formatJSONResponse({
-            status: 500,
-            message: e
-        });
+        return buildResponse(500, e.message, "An error occured!");
     }
 })
 
@@ -57,14 +50,9 @@ export const updateTodo = middyfy(async (event: APIGatewayProxyEvent): Promise<A
     const updatedAt = new Date().toISOString()
     try {
         const todo = await todosService.updateTodo(id, { completed, label, updatedAt });
-        return formatJSONResponse({
-            todo,
-        });
+        return buildResponse(200, todo, "Todo updated successfully!");
     } catch (e) {
-        return formatJSONResponse({
-            status: 500,
-            message: e
-        });
+        return buildResponse(500, e.message, "An error occured!");
     }
 })
 
@@ -72,13 +60,8 @@ export const deleteTodo = middyfy(async (event: APIGatewayProxyEvent): Promise<A
     const id = event.pathParameters.id;
     try {
         const todo = await todosService.deleteTodo(id)
-        return formatJSONResponse({
-            todo, id
-        });
+        return buildResponse(200, todo, "Todo deleted successfully!");
     } catch (e) {
-        return formatJSONResponse({
-            status: 500,
-            message: e
-        });
+        return buildResponse(500, e.message, "An error occured!");
     }
 })
