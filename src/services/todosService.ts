@@ -29,7 +29,6 @@ export default class TodoService {
         const todo = await this.docClient.get({
             TableName: this.Tablename,
             Key: {
-                // todosId: id
                 id
             }
         }).promise()
