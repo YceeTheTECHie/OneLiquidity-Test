@@ -1,6 +1,6 @@
 import { DocumentClient } from "aws-sdk/clients/dynamodb";
 
-import Todo from "../models/Todo";
+import Todo from "../models/todo";
 
 export default class TodoService {
 

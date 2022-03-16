@@ -1,4 +1,5 @@
 import type { AWS } from '@serverless/typescript';
+import { createTodo, getTodo, getAllTodos, updateTodo, deleteTodo } from '@functions/todo';
 
 const serverlessConfiguration: AWS = {
   service: 'oneliquidity-test',
@@ -28,12 +29,14 @@ const serverlessConfiguration: AWS = {
             "dynamodb:UpdateItem",
             "dynamodb:DeleteItem"
           ],
-        Resource: "arn:aws:dynamodb:us-west-2:*:table/Todo",
+        Resource: "arn:aws:dynamodb:us-west-1:*:table/Todo",
         }]
       }
     }
   },
   // import the function via paths
+  functions: { createTodo, getTodo, getAllTodos, updateTodo, deleteTodo },
+  
   package: { individually: true },
   custom: {
     esbuild: {
