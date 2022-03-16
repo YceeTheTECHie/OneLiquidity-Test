@@ -5,3 +5,4 @@ export default interface Todo {
     createdAt: string;
     updatedAt: string;
 }
+
