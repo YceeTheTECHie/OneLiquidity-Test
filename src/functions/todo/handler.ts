@@ -15,20 +15,26 @@ export const getAllTodos = middyfy(async (): Promise<APIGatewayProxyResult> => {
         return buildResponse(200, "Todos retrieved successfully!",{},todos);
    } 
     catch (e) {
-        return buildResponse(500, "An error occured!", e.errors||e.message, {});
+        return buildResponse(500, "An error occured!", e.message, {});
     }
 })
 
 export const createTodo = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     try {
         await createTodoSchema.validate(event.body, { abortEarly: false });
+    }
+    catch (e) {
+        return buildResponse(400, "Validation Failed!",e.errors, {});
+    }
+    try {
         const id = v4();
         const todo = await todosService.createTodo({
-            id,label: JSON.parse(JSON.stringify(event.body)).label,completed: false,createdAt: new Date().toISOString(),updatedAt: new Date().toISOString(),
+            id, label: JSON.parse(JSON.stringify(event.body)).label, completed: false, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(),
         })
         return buildResponse(200, "Todo added successfully!", {}, todo);
-    } catch (e) {
-        return buildResponse(400, "An error occured!", e.errors||e.message,{});
+    }
+     catch (e) {
+        return buildResponse(500, "An error occured!", e.message,{});
     }
 })
 
@@ -36,36 +42,41 @@ export const getTodo = middyfy(async (event: APIGatewayProxyEvent): Promise<APIG
     const id = event.pathParameters.id;
     try {
         const todo = await todosService.getTodo(id)
-        return buildResponse(200, "Todo retrieved successfully!", todo, {});
+        return buildResponse(200, "Todo retrieved successfully!", {},todo);
     } catch (e) {
-        return buildResponse(400,"An error occured!",e.errors||e.message, {});
+        return buildResponse(500,"An error occured!",e.message, {});
     }
 })
 
 export const updateTodo = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     const id = event.pathParameters.id;
-    const { label, completed } = JSON.parse(JSON.stringify(event.body)); 
-    const updatedAt = new Date().toISOString()
+    const { label, completed } = JSON.parse(JSON.stringify(event.body));
+    const updatedAt = new Date().toISOString();
     try {
-        await updateTodoSchema.validate(event.body, { abortEarly: false });
+        await todosService.getTodo(id);
     }
     catch (e) {
-        return buildResponse(400, "Validation Failed!",e.errors, {});
-        }
+        return buildResponse(400, "Bad request!", e.message, {});
+    }
     try {
+        await updateTodoSchema.validate(event.body, { abortEarly: false });
         const todo = await todosService.updateTodo(id, { completed, label, updatedAt });
-        return buildResponse(200,"Todo updated successfully!",{},todo);
-    } catch (e) {
-        return buildResponse(500, "An error occured!", e.message, {});
+        return buildResponse(200, "Todo updated successfully!", {}, todo);
+    }
+    catch (e) {
+        return buildResponse(400, "Validation Failed!", e.errors, {});
     }
 })
+  
 
-export const deleteTodo = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-    const id = event.pathParameters.id;
-    try {
-        const todo = await todosService.deleteTodo(id)
-        return buildResponse(200, "Todo deleted successfully!",  todo, {});
-    } catch (e) {
-        return buildResponse(500,"An error occured!", e.errors||e.message,{} );
-    }
-})
+    export const deleteTodo = middyfy(async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+        const id = event.pathParameters.id;
+        try { await todosService.getTodo(id); }
+        catch (e) { return buildResponse(400, "Bad request", e.message, {}) }
+        try {
+            const todo = await todosService.deleteTodo(id)
+            return buildResponse(200, "Todo deleted successfully!", {}, todo);
+        } catch (e) {
+            return buildResponse(500, "An error occured!", e.message, {});
+        }
+    })

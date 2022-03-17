@@ -33,7 +33,7 @@ export default class TodoService {
             }
         }).promise()
         if (!todo.Item) {
-            throw new Error("Id does not exit");
+            throw new Error("Id does not exist");
         }
         return todo.Item as Todo;
 
@@ -43,7 +43,8 @@ export default class TodoService {
      
         const todoObj = {
             label: todo.label,
-            completed : todo.completed
+            completed: todo.completed,
+            updatedAt: new Date().toISOString()
      };
   let updateExpression='set';
   let ExpressionAttributeNames={};
