@@ -11,8 +11,9 @@ import { createTodoSchema,updateTodoSchema } from "./schemas";
 export const getAllTodos = middyfy(async (): Promise<APIGatewayProxyResult> => {
     
     try {
-       const todos = await todosService.getAllTodos();
-        return buildResponse(200, "Todos retrieved successfully!",{},todos);
+        const todos = await todosService.getAllTodos();
+        const data = todos.sort((prev, next) => -prev.updatedAt.localeCompare(next.updatedAt))
+        return buildResponse(200, "Todos retrieved successfully!",{},data);
    } 
     catch (e) {
         return buildResponse(500, "An error occured!", e.message, {});
