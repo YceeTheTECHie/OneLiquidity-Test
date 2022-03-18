@@ -1,4 +1,6 @@
 # package directories
+
+.env
 node_modules
 jspm_packages
 
@@ -7,3 +9,5 @@ jspm_packages
 
 # esbuild directories
 .esbuild
+
+.dynamodb
