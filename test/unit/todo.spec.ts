@@ -1,6 +1,6 @@
 import { environment } from '../../src/utils/environment';
 import supertest from 'supertest';
-const sinon = require('sinon');
+import sinon from 'sinon';
 import todo from '../../src/services/index'
 import { expect } from 'chai';
 import {data} from './todo'
