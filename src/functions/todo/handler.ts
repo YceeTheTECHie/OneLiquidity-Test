@@ -22,7 +22,7 @@ export const createTodo = middyfy(async (event: APIGatewayProxyEvent): Promise<A
         const todo = await todosService.createTodo({
             id, label: JSON.parse(JSON.stringify(event.body)).label, completed: false, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(),
         })
-        return buildResponse(200, "Todo added successfully!", {}, todo);
+        return buildResponse(201, "Todo added successfully!", {}, todo);
     }
      catch (e) {
         return buildResponse(500, "An error occured!", e.message,{});

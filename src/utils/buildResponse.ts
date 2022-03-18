@@ -7,6 +7,9 @@ export const buildResponse = (statusCode: number,message:string,error:object,dat
         case 200:
             return formatJSONResponse({ statusCode, message, error,data})
             break;
+         case 201:
+            return formatJSONResponse({ statusCode, message, error,data})
+            break;
         case 400:
             return formatJSONResponse({ statusCode, message, error,data })
             break;
