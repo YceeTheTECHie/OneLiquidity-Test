@@ -14,4 +14,4 @@ export const dynamoDBClient = (): DocumentClient => {
 
 
 
-module.exports = { dynamoDBClient }
+export default dynamoDBClient;
