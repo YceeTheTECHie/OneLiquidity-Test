@@ -5,7 +5,7 @@ import supertest from 'supertest';
 var server = supertest.agent(`${environment.API_URL}`);
 
 
-describe("Todo Actions", function() {
+describe("Todo e2e tests", function() {
    
     var id = ''
     it("Todo Created successfully!", async function () {
