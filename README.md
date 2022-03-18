@@ -7,7 +7,6 @@
 - [Getting Started](#Getting-started)
   - [Features](#features)
   - [Making requests](#Making-requests)
-- [Docs](https://documenter.getpostman.com/view/14374190/TzY68ZMc)
 
 
 
