@@ -1,0 +1,8 @@
+{
+    "require": [
+        "test/runners/mocha/init.cjs"
+    ],
+    "spec": [
+        "test/**/*.spec.ts"
+    ]
+}
