@@ -34,7 +34,8 @@ export const getTodo = middyfy(async (event: APIGatewayProxyEvent): Promise<APIG
     try {
         const todo = await todosService.getTodo(id)
         return buildResponse(200, "Todo retrieved successfully!", {},todo);
-    } catch (e) {
+    }
+    catch (e) {
         return buildResponse(500,"An error occured!",e.message, {});
     }
 })
@@ -72,7 +73,6 @@ export const updateTodo = middyfy(async (event: APIGatewayProxyEvent): Promise<A
         }
     })
 
-    
     export const getAllTodos = middyfy(async (): Promise<APIGatewayProxyResult> => {
     
     try {

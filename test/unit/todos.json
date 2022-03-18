@@ -1,0 +1,182 @@
+{
+  "all": {
+    "success": {
+      "res": {
+        "statusCode": 200,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+            "statusCode": 200,
+            "message": "Todos retrieved successfully!",
+            "error": {},
+            "data": [
+                {
+                    "createdAt": "2022-03-18T11:31:42.038Z",
+                    "id": "b62860b3-7501-4087-9b6f-aba693fee86d",
+                    "label": "visit in-laws",
+                    "completed": false,
+                    "updatedAt": "2022-03-18T11:31:42.038Z"
+                },
+                {
+                    "createdAt": "2022-03-18T11:31:29.527Z",
+                    "id": "fdf5c331-0f05-4bcd-8cd9-ab5097425a7e",
+                    "label": "party on weekend",
+                    "completed": false,
+                    "updatedAt": "2022-03-18T11:31:29.527Z"
+                },
+                {
+                    "createdAt": "2022-03-18T11:31:16.257Z",
+                    "id": "cf002ee4-41d1-49bc-b592-814f1c6f56d6",
+                    "label": "cook at night",
+                    "completed": false,
+                    "updatedAt": "2022-03-18T11:31:16.257Z"
+                }
+            ]
+      }
+    }
+  },
+  "single": {
+    "success": {
+      "res": {
+        "statusCode": 200,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "statusCode": 200,
+        "message": "Todo retrieved successfully!",
+        "error": {},
+        "data": {
+            "createdAt": "2022-03-18T11:31:42.038Z",
+            "id": "b62860b3-7501-4087-9b6f-aba693fee86d",
+            "label": "visit in-laws",
+            "completed": false,
+            "updatedAt": "2022-03-18T11:31:42.038Z"
+        }
+      }
+    },
+    "failure": {
+      "res": {
+        "statusCode": 400,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+           "statusCode": 400,
+            "message": "Bad request!",
+            "error": "Id does not exist",
+            "data": {}
+      }
+    }
+
+
+
+
+  },
+  "add": {
+    "success": {
+      "res": {
+        "statusCode": 201,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "success",
+        "data": [
+          {
+            "id": 5,
+            "name": "Titanic",
+            "genre": "Drama",
+            "rating": 8,
+            "explicit": true
+          }
+        ]
+      }
+    },
+    "failure": {
+      "res": {
+        "statusCode": 400,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "error",
+        "message": "Something went wrong."
+      }
+    }
+  },
+  "update": {
+    "success": {
+      "res": {
+        "statusCode": 200,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "success",
+        "data": [
+          {
+            "id": 5,
+            "name": "Titanic",
+            "genre": "Drama",
+            "rating": 9,
+            "explicit": true
+          }
+        ]
+      }
+    },
+    "failure": {
+      "res": {
+        "statusCode": 404,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "error",
+        "message": "That movie does not exist."
+      }
+    }
+  },
+  "delete": {
+    "success": {
+      "res": {
+        "statusCode": 200,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "success",
+        "data": [
+          {
+            "id": 5,
+            "name": "Titanic",
+            "genre": "Drama",
+            "rating": 9,
+            "explicit": true
+          }
+        ]
+      }
+    },
+    "failure": {
+      "res": {
+        "statusCode": 404,
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "body": {
+        "status": "error",
+        "message": "That movie does not exist."
+      }
+    }
+  }
+}
